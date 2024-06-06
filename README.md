@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @rokas32
+- 👋 Hi, I’m @rokas32 or Rokas Kriščiūnas 😉
 - 👀 I’m interested in data analytics, chess!
 - 🌱 I’m currently learning python
 - ⚡ Fun fact: watched "Lord of the Rings" trilogy at least 20 times 🙃
