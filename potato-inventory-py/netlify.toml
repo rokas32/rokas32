@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  # This points to the new location for Node.js functions
+  directory = "netlify/functions"
+  # We don't need a specific node_bundler setting for standard JS functions
