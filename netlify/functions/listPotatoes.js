@@ -1,30 +1,45 @@
-// netlify/functions/listPotatoes.js
+// netlify/listPotatoes.js
+
+const fetch = require('node-fetch');
+
+// ⬅️ Import only the URL and the new AUTH_HEADERS object
+const { 
+    SUPABASE_URL, 
+    AUTH_HEADERS 
+} = require('./supabaseConfig'); 
+
 exports.handler = async function(event) {
-  try {
-    const SUPABASE_URL = process.env.SUPABASE_URL;
-    const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    
-    // Check for keys (important for local testing)
-    if (!SUPABASE_URL || !KEY) {
-      return { statusCode: 500, body: JSON.stringify({ error: "Configuration Error: Supabase keys not set." }) };
+    if (event.httpMethod !== 'GET') {
+        return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/potatoes?select=*`, {
-      headers: {
-        'apikey': KEY,
-        'Authorization': `Bearer ${KEY}`
-      }
-    });
-    
-    const data = await res.json();
-    
-    if (!res.ok) {
-        return { statusCode: res.status, body: JSON.stringify({ error: 'DB API Error', details: data }) };
+    if (!SUPABASE_URL || !AUTH_HEADERS) {
+        return { statusCode: 500, body: 'Missing Supabase credentials or configuration' };
     }
 
-    return { statusCode: 200, body: JSON.stringify(data) };
-  } catch (err) {
-    console.error('List Error:', err);
-    return { statusCode: 500, body: JSON.stringify({ error: String(err) }) };
-  }
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/potatoes?select=*`, {
+            method: 'GET',
+            // ⬅️ Use the centralized AUTH_HEADERS object directly
+            headers: AUTH_HEADERS 
+        });
+
+        const data = await res.json();
+        
+        if (!res.ok) {
+            return { statusCode: res.status, body: JSON.stringify(data) };
+        }
+
+        return { 
+            statusCode: 200, 
+            body: JSON.stringify(data) 
+        };
+        
+    } catch (error) {
+        console.error('Fetch Error:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Internal Server Error', details: error.message }),
+        };
+    }
 };
