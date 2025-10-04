@@ -3,7 +3,7 @@
 // In deletePotato.js
 
 const SUPABASE_URL = process.env['https://bjjddiqplwyjwiyjadbk.supabase.co'];
-const SUPABASE_SERVICE_ROLE_KEY = process.env['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqamRkaXFwbHd5andpeWphZGJrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1OTE1ODYwNywiZXhwIjoyMDc0NzM0NjA3fQ.Ky_FVmZk-weuxrLGmUXo3QwatDUa1dktOltFq4KUTjs'];
+const SUPABASE_SERVICE_ROLE_KEY = process.env['sb_secret_y2TpY7iAa8mCkyku-1ILEg_H-eT5rcb'];
 
 
 
