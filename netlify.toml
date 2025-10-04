@@ -1,10 +1,11 @@
 [build]
   command = "npm run build"
-  functions = "netlify/functions"
+  publish = "dist"
 
 [build.environment]
-  # Setting Node.js version explicitly can prevent build tool compatibility errors
   NODE_VERSION = "20"
-  
+
 [functions]
+  directory = "netlify/functions"
   node_bundler = "esbuild"
+
